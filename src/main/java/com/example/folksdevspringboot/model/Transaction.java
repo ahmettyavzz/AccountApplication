@@ -1,8 +1,8 @@
 package com.example.folksdevspringboot.model;
 
 import com.example.folksdevspringboot.model.type.TransactionType;
+import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.ManyToAny;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
 
 @Entity
+@Data
 public class Transaction {
     @javax.persistence.Id
     @GeneratedValue(generator = "UUID")
