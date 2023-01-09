@@ -1,5 +1,6 @@
 package com.example.folksdevspringboot.service;
 
+import com.example.folksdevspringboot.converter.AccountDtoConverter;
 import com.example.folksdevspringboot.dto.AccountDto;
 import com.example.folksdevspringboot.dto.CreateAccountRequest;
 import com.example.folksdevspringboot.model.Account;
@@ -16,20 +17,21 @@ import java.time.LocalDateTime;
 public class AccountService {
     private final AccountRepository accountRepository;
     private final CustomerService customerService;
-    private final TransactionService transactionService;
+    private final AccountDtoConverter accountDtoConverter;
+
 
     public AccountDto createAccount(CreateAccountRequest createAccountRequest) {
         Customer customer = customerService.findCustomerById(createAccountRequest.getCustomerId());
 
-        Account account= new Account(createAccountRequest.getInitialCredit()
-                ,LocalDateTime.now()
-                ,customer);
+        Account account = new Account(createAccountRequest.getInitialCredit()
+                , LocalDateTime.now()
+                , customer);
 
-        if (createAccountRequest.getInitialCredit() >0){
-            Transaction transaction=transactionService.initiateMoney(account, createAccountRequest.getInitialCredit());
-            account.getTransaction().add(transaction);
+        if (createAccountRequest.getInitialCredit() > 0) {
+            Transaction transaction = new Transaction(createAccountRequest.getInitialCredit(), account);
+            account.getTransactions().add(transaction);
         }
-        return null;
+        return accountDtoConverter.convert(accountRepository.save(account));
     }
 }
 
