@@ -4,7 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.Set;
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 public class AccountDto {
@@ -12,5 +13,5 @@ public class AccountDto {
     private Long balance;
     private LocalDateTime creationDate;
     private AccountCustomerDto customer;
-    private Set<TransactionDto> transactions;
+    private List<TransactionDto> transactions;
 }

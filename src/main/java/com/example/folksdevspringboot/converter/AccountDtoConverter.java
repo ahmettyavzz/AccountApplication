@@ -19,6 +19,6 @@ public class AccountDtoConverter {
                 , entity.getBalance()
                 , entity.getCreationDate()
                 , customerDtoConverter.convertToAccountCustomer(entity.getCustomer())
-                , entity.getTransaction().stream().map(transactionDtoConverter::convert).collect(Collectors.toSet()));
+                , entity.getTransactions().stream().map(transactionDtoConverter::convert).collect(Collectors.toList()));
     }
 }
