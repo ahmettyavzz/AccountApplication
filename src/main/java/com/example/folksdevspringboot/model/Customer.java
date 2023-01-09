@@ -1,16 +1,20 @@
 package com.example.folksdevspringboot.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.OneToMany;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Customer {
     @javax.persistence.Id
     @GeneratedValue(generator = "UUID")
@@ -20,7 +24,7 @@ public class Customer {
     private String name;
     private String surname;
 
-    @OneToMany(mappedBy = "customer",fetch = FetchType.LAZY)
-    private Set<Account> accounts;
+    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
+    private List<Account> accounts;
 
 }
